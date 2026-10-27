@@ -94,6 +94,99 @@ document.addEventListener('DOMContentLoaded', function() {
         window.open(waLink(`Hello Tasmim Travels, I need ${need}${destination ? ` for ${destination}` : ''}.`), '_blank', 'noopener');
     });
 
+    // Flight fares: loaded from fares.json (or a published Google Sheet CSV) so they can be updated daily.
+    // Fares dated before today are hidden automatically.
+    const FARES_SOURCE = 'fares.json';
+    const faresGrid = document.querySelector('.fares-grid');
+    const faresEmpty = document.querySelector('.fares-empty');
+    const faresUpdated = document.querySelector('.fares-updated');
+    const rupees = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 });
+    const formatDate = (iso, opts) => new Date(`${iso}T00:00:00`).toLocaleDateString('en-GB', opts);
+
+    const parseCsv = (text) => {
+        const rows = text.trim().split(/\r?\n/).map((line) =>
+            (line.match(/("([^"]|"")*"|[^,]*)(,|$)/g) || [])
+                .map((cell) => cell.replace(/,$/, '').replace(/^"|"$/g, '').replace(/""/g, '"').trim())
+        );
+        const header = rows.shift().map((h) => h.toLowerCase());
+        return { fares: rows.map((r) => Object.fromEntries(header.map((h, i) => [h, r[i] || '']))) };
+    };
+
+    const renderFares = ({ updated, fares }) => {
+        const now = new Date();
+        // local date (not UTC), so fares roll over at the visitor's midnight
+        const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+        const upcoming = fares
+            .filter((f) => f.from && f.to && f.date >= today && Number(f.price) > 0)
+            .sort((a, b) => a.date.localeCompare(b.date));
+
+        // one card per route + airline + baggage
+        const routes = new Map();
+        upcoming.forEach((f) => {
+            const key = [f.from, f.to, f.airline, f.baggage].join('|');
+            if (!routes.has(key)) routes.set(key, { ...f, rows: [] });
+            routes.get(key).rows.push(f);
+        });
+
+        faresGrid.replaceChildren();
+        routes.forEach((route) => {
+            const card = document.createElement('article');
+            card.className = 'fare-card';
+
+            const title = document.createElement('h3');
+            title.className = 'fare-route';
+            title.append(route.from, Object.assign(document.createElement('i'), { className: 'fas fa-plane', ariaHidden: 'true' }), route.to);
+            card.append(title);
+
+            const meta = document.createElement('div');
+            meta.className = 'fare-meta';
+            [route.airline, route.baggage && `Baggage ${route.baggage}`].filter(Boolean).forEach((text) => {
+                meta.append(Object.assign(document.createElement('span'), { textContent: text }));
+            });
+            card.append(meta);
+
+            const list = document.createElement('ul');
+            list.className = 'fare-rows';
+            route.rows.forEach((f) => {
+                const li = document.createElement('li');
+                li.append(
+                    Object.assign(document.createElement('span'), { className: 'fare-date', textContent: formatDate(f.date, { weekday: 'short', day: 'numeric', month: 'short' }) }),
+                    Object.assign(document.createElement('span'), { className: 'fare-price', textContent: rupees.format(Number(f.price)) })
+                );
+                list.append(li);
+            });
+            card.append(list);
+
+            // only name a date when the route has just one, otherwise let the customer say which
+            const when = route.rows.length === 1 ? ` on ${formatDate(route.rows[0].date, { day: 'numeric', month: 'short' })}` : '';
+            const book = document.createElement('a');
+            book.className = 'offer-cta';
+            book.href = waLink(`Hello Tasmim Travels, I'd like to book ${route.from} to ${route.to}${route.airline ? ` (${route.airline})` : ''}${when}.`);
+            book.target = '_blank';
+            book.rel = 'noopener';
+            book.innerHTML = '<i class="fab fa-whatsapp" aria-hidden="true"></i> Book on WhatsApp';
+            card.append(book);
+
+            faresGrid.append(card);
+        });
+
+        faresEmpty.hidden = routes.size > 0;
+        if (updated) {
+            faresUpdated.textContent = `Last updated ${formatDate(updated, { day: 'numeric', month: 'long', year: 'numeric' })}`;
+            faresUpdated.hidden = false;
+        }
+    };
+
+    fetch(FARES_SOURCE, { cache: 'no-cache' })
+        .then((res) => {
+            if (!res.ok) throw new Error(res.status);
+            return FARES_SOURCE.endsWith('.json') ? res.json() : res.text().then(parseCsv);
+        })
+        .then(renderFares)
+        .catch(() => {
+            faresEmpty.hidden = false;
+        });
+
     // Contact form: no backend, so the enquiry is sent as a WhatsApp message
     const form = document.querySelector('.contact-form');
     const note = form.querySelector('.form-note');

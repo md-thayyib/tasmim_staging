@@ -1,0 +1,11 @@
+{
+    "updated": "2026-10-27",
+    "fares": [
+        { "from": "Mangalore", "to": "Abu Dhabi", "airline": "IndiGo", "baggage": "30+7 kg", "date": "2026-10-27", "price": 10500 },
+        { "from": "Mangalore", "to": "Abu Dhabi", "airline": "IndiGo", "baggage": "30+7 kg", "date": "2026-10-28", "price": 13000 },
+        { "from": "Bangalore", "to": "Abu Dhabi", "airline": "IndiGo", "baggage": "30+7 kg", "date": "2026-10-28", "price": 9900 },
+        { "from": "Chennai", "to": "Abu Dhabi", "airline": "Air India Express", "baggage": "30+7 kg", "date": "2026-10-28", "price": 9000 },
+        { "from": "Kannur", "to": "Bahrain", "airline": "", "baggage": "", "date": "2026-11-01", "price": 26700 },
+        { "from": "Kannur", "to": "Bahrain", "airline": "", "baggage": "", "date": "2026-11-04", "price": 25200 }
+    ]
+}

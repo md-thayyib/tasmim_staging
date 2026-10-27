@@ -399,6 +399,162 @@ section {
     }
 }
 
+/* Flight Fares Section */
+.fares {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.fares-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.fares-head h2 {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+}
+
+.fares-updated {
+    margin-top: 0.4rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.btn-channel {
+    background: var(--whatsapp);
+    color: #fff;
+}
+
+.btn-channel:hover {
+    background: var(--whatsapp-deep);
+}
+
+.fares-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+}
+
+.fare-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.fare-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.fare-route {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    line-height: 1.2;
+}
+
+.fare-route i {
+    font-size: 0.9rem;
+    color: var(--gold-deep);
+}
+
+.fare-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.75rem 0 1rem;
+}
+
+.fare-meta span {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--gold-deep);
+    background: var(--sand);
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+}
+
+.fare-rows {
+    list-style: none;
+    margin-bottom: 1.25rem;
+}
+
+.fare-rows li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.6rem 0;
+    border-bottom: 1px dashed var(--line);
+}
+
+.fare-rows li:last-child {
+    border-bottom: 0;
+}
+
+.fare-date {
+    color: var(--muted);
+    font-weight: 500;
+}
+
+.fare-price {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.fare-card .offer-cta {
+    margin-top: auto;
+}
+
+.fares-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    border-radius: var(--radius);
+    background: var(--sand);
+    color: var(--muted);
+}
+
+.fares-empty[hidden] {
+    display: none;
+}
+
+.fares-empty > i {
+    font-size: 1.75rem;
+    color: var(--gold-deep);
+}
+
+.fares-note {
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+@media (max-width: 768px) {
+    .fares-head {
+        align-items: flex-start;
+    }
+
+    .fares-head .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
 /* Offers Section */
 .offers {
     background: var(--sand);
