@@ -1,153 +1,116 @@
+document.documentElement.classList.add('js');
+
 document.addEventListener('DOMContentLoaded', function() {
-    const navbar = document.querySelector('.navbar');
+    const WHATSAPP_NUMBER = '918281404323';
+    const waLink = (text) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+
+    // WhatsApp links: every [data-wa] element opens a chat with its prefilled message
+    document.querySelectorAll('[data-wa]').forEach((el) => {
+        el.href = waLink(el.dataset.wa);
+        el.target = '_blank';
+        el.rel = 'noopener';
+    });
+
+    // Header: solid background once the page scrolls past the top
+    const header = document.querySelector('.site-header');
+    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 40);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Mobile menu
+    const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
-    
-    // Add hamburger button to navbar
-    const hamburger = document.createElement('button');
-    hamburger.classList.add('hamburger');
-    hamburger.innerHTML = '<i class="fas fa-bars"></i>';
-    navbar.appendChild(hamburger);
 
-    // Toggle mobile menu
-    hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        hamburger.innerHTML = navLinks.classList.contains('active') 
-            ? '<i class="fas fa-times"></i>' 
-            : '<i class="fas fa-bars"></i>';
+    const setMenu = (open) => {
+        header.classList.toggle('menu-open', open);
+        hamburger.setAttribute('aria-expanded', open);
+        hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        hamburger.innerHTML = `<i class="fas fa-${open ? 'xmark' : 'bars'}" aria-hidden="true"></i>`;
+    };
+
+    hamburger.addEventListener('click', () => setMenu(!header.classList.contains('menu-open')));
+    navLinks.addEventListener('click', (e) => {
+        if (e.target.closest('a')) setMenu(false);
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') setMenu(false);
     });
 
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!navbar.contains(e.target) && navLinks.classList.contains('active')) {
-            navLinks.classList.remove('active');
-            hamburger.innerHTML = '<i class="fas fa-bars"></i>';
-        }
-    });
-
-    // Close menu when clicking a link
-    navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+    // Highlight the nav link for the section in view
+    const navAnchors = [...navLinks.querySelectorAll('a[href^="#"]')];
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            navAnchors.forEach((a) => a.classList.toggle('active', a.getAttribute('href') === `#${entry.target.id}`));
         });
-    });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    document.querySelectorAll('main section[id]').forEach((s) => sectionObserver.observe(s));
 
-    // Destinations data
-    const destinations = [
-        {
-            image: 'assets/egypt.jpeg',
-            name: 'Egypt',
-            description: 'Explore the ancient pyramids and rich cultural heritage',
-            features: ['Visa Processing', 'Tour Packages', 'Hotel Booking']
-        },
-        {
-            image: 'assets/morocco.jpeg',
-            name: 'Morocco',
-            description: 'Experience the magic of ancient medinas and desert landscapes',
-            features: ['Visa Processing', 'Tour Packages', 'Hotel Booking']
-        },
-        {
-            image: 'assets/uzbek.jpeg',
-            name: 'Uzbekistan',
-            description: "Discover the beauty of Central Asia's historic Silk Road",
-            features: ['Visa Processing', 'Tour Packages', 'Hotel Booking']
-        },
-        {
-            image: 'assets/qatar.jpeg',
-            name: 'Qatar',
-            description: 'Experience luxury and modernity in the heart of Arabia',
-            features: ['Visa Processing', 'Tour Packages', 'Hotel Booking']
-        },
-        {
-            image: 'assets/joradan.jpeg',
-            name: 'Jordan',
-            description: 'Explore diverse cultures and tropical paradises',
-            features: ['Visa Processing', 'Tour Packages', 'Hotel Booking']
-        }
-    ];
-
-    // Function to create destination card
-    function createDestinationCard(destination) {
-        return `
-            <div class="destination-card">
-                <div class="destination-img">
-                    <img src="${destination.image}" alt="${destination.name}">
-                </div>
-                <div class="destination-content">
-                    <h3>${destination.name}</h3>
-                    <p>${destination.description}</p>
-                    <ul class="destination-features">
-                        ${destination.features.map(feature => `
-                            <li><i class="fas fa-check"></i> ${feature}</li>
-                        `).join('')}
-                    </ul>
-                    <a href="#contact" class="destination-cta">Enquire Now</a>
-                </div>
-            </div>
-        `;
-    }
-
-    // Generate all destination cards
-    const destinationsGrid = document.querySelector('.destinations-grid');
-    destinationsGrid.innerHTML = destinations.map(destination => 
-        createDestinationCard(destination)
-    ).join('');
+    // Scroll reveal
+    const revealObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+        });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
 
     // View More functionality
     const viewMoreBtn = document.querySelector('.view-more-btn');
-    
+    const destinationsGrid = document.querySelector('.destinations-grid');
+
     viewMoreBtn.addEventListener('click', () => {
-        destinationsGrid.classList.toggle('show-all');
-        viewMoreBtn.textContent = destinationsGrid.classList.contains('show-all') 
-            ? 'Show Less' 
-            : 'View More Destinations';
+        const showAll = destinationsGrid.classList.toggle('show-all');
+        viewMoreBtn.setAttribute('aria-expanded', showAll);
+        viewMoreBtn.textContent = showAll ? 'Show less' : 'View more destinations';
+        if (!showAll) destinationsGrid.scrollIntoView({ block: 'start' });
     });
 
-    // Offers data
-    const offers = [
-        {
-            image: 'assets/offers/umra.jpeg',
-            title: 'Umrah Package',
-            duration: '5 Days / 4 Nights',
-            price: 'Starting from $999',
-            alt: 'Special Umrah Package'
-        },
-        {
-            image: 'assets/offers/saudi.jpeg',
-            title: 'Saudi Arabia Tour',
-            duration: '7 Days / 6 Nights',
-            price: 'Starting from $1299',
-            alt: 'Saudi Arabia Special'
-        },
-        {
-            image: 'assets/offers/uae.jpeg',
-            title: 'Dubai Weekend',
-            duration: '3 Days / 2 Nights',
-            price: 'Starting from $499',
-            alt: 'Dubai Weekend Special'
+    // Offer poster lightbox
+    const lightbox = document.querySelector('.lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+
+    document.querySelectorAll('[data-lightbox]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            lightboxImg.src = btn.dataset.lightbox;
+            lightboxImg.alt = btn.querySelector('img').alt;
+            lightbox.showModal();
+        });
+    });
+    lightbox.querySelector('.lightbox-close').addEventListener('click', () => lightbox.close());
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) lightbox.close();
+    });
+
+    // Contact form: no backend, so the enquiry is sent as a WhatsApp message
+    const form = document.querySelector('.contact-form');
+    const note = form.querySelector('.form-note');
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const required = [...form.querySelectorAll('[required]')];
+        required.forEach((f) => f.classList.toggle('invalid', !f.value.trim()));
+        const firstEmpty = required.find((f) => !f.value.trim());
+        if (firstEmpty) {
+            note.textContent = 'Please add your name and a short message.';
+            firstEmpty.focus();
+            return;
         }
-    ];
 
-    // Function to create offer card
-    function createOfferCard(offer) {
-        return `
-            <div class="offer-card">
-                <img src="${offer.image}" alt="${offer.alt}">
-                <div class="offer-overlay">
-                    <h3>${offer.title}</h3>
-                    <p>${offer.duration}</p>
-                    <p class="price">${offer.price}</p>
-                    <a href="https://wa.me/+966550589472" class="offer-cta" target="_blank">
-                        <i class="fab fa-whatsapp"></i> Enquire Now
-                    </a>
-                </div>
-            </div>
-        `;
-    }
+        const data = new FormData(form);
+        const destination = data.get('destination').trim();
+        const lines = [
+            `Hello Tasmim Travels, I'm ${data.get('name').trim()}.`,
+            `I need: ${data.get('service')}`,
+        ];
+        if (destination) lines.push(`Destination: ${destination}`);
+        lines.push('', data.get('message').trim());
 
-    // Generate all offer cards
-    const offersGrid = document.querySelector('.offers-grid');
-    offersGrid.innerHTML = offers.map(offer => 
-        createOfferCard(offer)
-    ).join('');
-}); 
+        window.open(waLink(lines.join('\n')), '_blank', 'noopener');
+        note.textContent = 'Opening WhatsApp with your message…';
+        form.reset();
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+});
