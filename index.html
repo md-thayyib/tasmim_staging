@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Tasmim Travel and Tours | Visa, Umrah, Flights & Tour Packages</title>
     <meta name="description" content="Tasmim Travel and Tours — visa processing, Umrah visas, air ticketing, hotel booking and tailor-made tour packages for Saudi Arabia, UAE, Egypt, Jordan, Morocco, Qatar, Uzbekistan, Vietnam, USA and more.">
-    <meta name="theme-color" content="#0d0d0f">
+    <meta name="theme-color" content="#eef3f6">
     <link rel="canonical" href="https://tasmimtravels.com/">
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="Tasmim Travel and Tours">
     <meta property="og:description" content="Visa, Umrah, flights, hotels and tour packages — planned end to end.">
-    <meta property="og:image" content="assets/hero.webp">
+    <meta property="og:image" content="https://tasmimtravels.com/assets/hero.webp">
     <meta property="og:url" content="https://tasmimtravels.com/">
 
     <link rel="icon" type="image/jpeg" href="assets/favicon.jpg">
@@ -19,7 +19,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 
@@ -29,7 +29,7 @@
         "@type": "TravelAgency",
         "name": "Tasmim Travel and Tours",
         "url": "https://tasmimtravels.com/",
-        "logo": "https://tasmimtravels.com/assets/logo.png",
+        "logo": "https://tasmimtravels.com/assets/logo-ink.png",
         "telephone": "+918281404323",
         "email": "info@tasmimtravels.com"
     }
@@ -38,279 +38,279 @@
 <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
+    <!-- Ambient prism light -->
+    <div class="ambient" aria-hidden="true">
+        <span class="glow glow-a"></span>
+        <span class="glow glow-b"></span>
+        <span class="glow glow-c"></span>
+    </div>
+
     <!-- Header -->
     <header class="site-header">
-        <nav class="navbar" aria-label="Main">
+        <nav class="navbar glass" aria-label="Main">
             <a href="#home" class="logo" aria-label="Tasmim Travel and Tours — home">
-                <img src="assets/logo.png" alt="Tasmim Travel and Tours" width="600" height="162">
+                <img src="assets/logo-ink.png" alt="Tasmim Travel and Tours" width="600" height="162">
             </a>
-            <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
-                <i class="fas fa-bars" aria-hidden="true"></i>
-            </button>
             <ul class="nav-links" id="nav-links">
-                <li><a href="#home">Home</a></li>
                 <li><a href="#offers">Offers</a></li>
-                <li><a href="#destinations">Visas</a></li>
+                <li><a href="#visas">Visas</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#contact" class="nav-cta">Contact</a></li>
+                <li class="nav-contact"><a href="#contact">Contact</a></li>
             </ul>
+            <a href="#contact" class="nav-cta">Plan a trip</a>
+            <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+                <span></span><span></span>
+            </button>
         </nav>
     </header>
 
     <main id="main">
-        <!-- Hero Section -->
+        <!-- Hero -->
         <section id="home" class="hero">
-            <div class="hero-content">
-                <p class="eyebrow">Travel &amp; Visa Specialists</p>
-                <h1>Your journey,<br><em>our excellence.</em></h1>
-                <p class="hero-sub">Visas, Umrah, flights, hotels and tour packages — handled end to end, so you can focus on the trip.</p>
-                <div class="hero-actions">
-                    <a href="#" class="btn btn-whatsapp" data-wa="Hello Tasmim Travels, I'd like to plan a trip.">
-                        <i class="fab fa-whatsapp" aria-hidden="true"></i> Chat on WhatsApp
-                    </a>
-                    <a href="#destinations" class="btn btn-ghost">Explore visas</a>
+            <div class="hero-frame">
+                <div class="hero-visual">
+                <img class="hero-img" src="assets/hero.webp" alt="" width="1792" height="1024" fetchpriority="high">
+                <div class="hero-shade" aria-hidden="true"></div>
+
+                <div class="hero-copy">
+                    <p class="kicker load" style="--d: 0.1s">Tasmim Travel &amp; Tours</p>
+                    <h1 class="load" style="--d: 0.2s">Travel, <em>made clear.</em></h1>
+                    <p class="hero-sub load" style="--d: 0.35s">Visas, Umrah, flights, hotels and tours — handled end to end by one friendly team.</p>
                 </div>
+                </div>
+
+                <!-- Quick planner -->
+                <form class="planner glass load" style="--d: 0.5s" aria-label="Quick trip enquiry">
+                    <p class="planner-title">Plan your trip</p>
+                    <label class="pill-field">
+                        <span>I need</span>
+                        <select name="service">
+                            <option>A visa</option>
+                            <option>An Umrah visa</option>
+                            <option>Flight tickets</option>
+                            <option>A hotel</option>
+                            <option>A tour package</option>
+                        </select>
+                    </label>
+                    <label class="pill-field">
+                        <span>For</span>
+                        <input name="destination" type="text" placeholder="Egypt, Dubai, Saudi…" autocomplete="off">
+                    </label>
+                    <button type="submit" class="btn btn-ink">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i> Ask on WhatsApp
+                    </button>
+                </form>
             </div>
-            <ul class="hero-badges">
-                <li><i class="fas fa-passport" aria-hidden="true"></i> Visa processing</li>
-                <li><i class="fas fa-kaaba" aria-hidden="true"></i> Umrah visas</li>
-                <li><i class="fas fa-plane-departure" aria-hidden="true"></i> Air tickets</li>
-                <li><i class="fas fa-hotel" aria-hidden="true"></i> Hotel booking</li>
+
+            <ul class="ticker" aria-label="What we handle">
+                <li><i class="fa-solid fa-passport" aria-hidden="true"></i> Visa processing</li>
+                <li><i class="fa-solid fa-kaaba" aria-hidden="true"></i> Umrah visas</li>
+                <li><i class="fa-solid fa-plane" aria-hidden="true"></i> Air tickets</li>
+                <li><i class="fa-solid fa-bed" aria-hidden="true"></i> Hotels</li>
+                <li><i class="fa-solid fa-compass" aria-hidden="true"></i> Tour packages</li>
             </ul>
         </section>
 
-        <!-- Recent Offers Section -->
-        <section id="offers" class="offers">
+        <!-- Offers -->
+        <section id="offers" class="section">
             <div class="section-head reveal">
-                <p class="eyebrow">Latest</p>
-                <h2>Special offers</h2>
-                <p>Tap any offer to view the full poster, or enquire straight on WhatsApp.</p>
+                <p class="kicker">Now offering</p>
+                <h2>Current <em>offers</em></h2>
+                <div class="carousel-nav" aria-hidden="true">
+                    <button class="round-btn" data-scroll="-1" tabindex="-1"><i class="fa-solid fa-arrow-left"></i></button>
+                    <button class="round-btn" data-scroll="1" tabindex="-1"><i class="fa-solid fa-arrow-right"></i></button>
+                </div>
             </div>
-            <div class="offers-grid">
-                <article class="offer-card reveal">
+
+            <div class="carousel" tabindex="0" aria-label="Offers, scroll sideways">
+                <article class="offer glass">
                     <button class="offer-media" data-lightbox="assets/offers/umra.jpeg" aria-label="View Umrah Visa poster">
                         <img src="assets/offers/umra.jpeg" alt="Umrah Visa for individuals and groups" loading="lazy">
                     </button>
                     <div class="offer-body">
-                        <span class="tag">Saudi Arabia</span>
                         <h3>Umrah Visa</h3>
                         <p>For individuals and groups.</p>
-                        <a href="#" class="offer-cta" data-wa="Hello, I'm interested in the Umrah Visa offer.">
-                            <i class="fab fa-whatsapp" aria-hidden="true"></i> Enquire now
-                        </a>
+                        <a href="#" class="link-wa" data-wa="Hello, I'm interested in the Umrah Visa offer.">Enquire <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </article>
-
-                <article class="offer-card reveal">
+                <article class="offer glass">
                     <button class="offer-media" data-lightbox="assets/offers/saudi.jpeg" aria-label="View Visit Saudi poster">
                         <img src="assets/offers/saudi.jpeg" alt="Visit Saudi — business, Umrah, tourist and GCC resident visas" loading="lazy">
                     </button>
                     <div class="offer-body">
-                        <span class="tag">Saudi Arabia</span>
                         <h3>Visit Saudi</h3>
                         <p>Business, Umrah, tourist and GCC-resident visas.</p>
-                        <a href="#" class="offer-cta" data-wa="Hello, I'm interested in the Visit Saudi offer.">
-                            <i class="fab fa-whatsapp" aria-hidden="true"></i> Enquire now
-                        </a>
+                        <a href="#" class="link-wa" data-wa="Hello, I'm interested in the Visit Saudi offer.">Enquire <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </article>
-
-                <article class="offer-card reveal">
+                <article class="offer glass">
                     <button class="offer-media" data-lightbox="assets/offers/uae.jpeg" aria-label="View Trip to UAE poster">
                         <img src="assets/offers/uae.jpeg" alt="Trip to UAE" loading="lazy">
                     </button>
                     <div class="offer-body">
-                        <span class="tag">UAE</span>
                         <h3>Trip to UAE</h3>
                         <p>Dubai, Abu Dhabi and beyond.</p>
-                        <a href="#" class="offer-cta" data-wa="Hello, I'm interested in the Trip to UAE offer.">
-                            <i class="fab fa-whatsapp" aria-hidden="true"></i> Enquire now
-                        </a>
+                        <a href="#" class="link-wa" data-wa="Hello, I'm interested in the Trip to UAE offer.">Enquire <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </article>
-
-                <article class="offer-card reveal">
+                <article class="offer glass">
                     <button class="offer-media" data-lightbox="assets/offers/world.jpeg" aria-label="View Travel Around the World poster">
                         <img src="assets/offers/world.jpeg" alt="Let's travel around the world — flights, transfers, accommodation, excursions" loading="lazy">
                     </button>
                     <div class="offer-body">
-                        <span class="tag">Packages</span>
-                        <h3>Travel around the world</h3>
-                        <p>Flights, transfers, stays and excursions — your itinerary.</p>
-                        <a href="#" class="offer-cta" data-wa="Hello, I'm interested in a custom travel package.">
-                            <i class="fab fa-whatsapp" aria-hidden="true"></i> Enquire now
-                        </a>
+                        <h3>Around the world</h3>
+                        <p>Flights, transfers, stays and excursions.</p>
+                        <a href="#" class="link-wa" data-wa="Hello, I'm interested in a custom travel package.">Enquire <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+                <article class="offer glass">
+                    <button class="offer-media" data-lightbox="assets/offers/international.jpeg" aria-label="View International Travel and Visa Services poster">
+                        <img src="assets/offers/international.jpeg" alt="International travel and visa services" loading="lazy">
+                    </button>
+                    <div class="offer-body">
+                        <h3>Travel &amp; visa services</h3>
+                        <p>Every document, every booking.</p>
+                        <a href="#" class="link-wa" data-wa="Hello, I need help with travel and visa services.">Enquire <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </article>
             </div>
         </section>
 
-        <!-- Destinations Section -->
-        <section id="destinations" class="destinations">
+        <!-- Visas -->
+        <section id="visas" class="section">
             <div class="section-head reveal">
-                <p class="eyebrow">Visa services</p>
-                <h2>Popular destinations</h2>
-                <p>We prepare and process your visa application, and can add flights, hotels and tours on top.</p>
+                <p class="kicker">Visa services</p>
+                <h2>Where are you <em>going?</em></h2>
+                <p class="lede">We prepare and process your application — and can add flights, hotels and tours on top.</p>
             </div>
-            <div class="destinations-grid">
-                <article class="destination-card reveal">
-                    <div class="destination-media"><img src="assets/egypt.jpeg" alt="Egypt visa" loading="lazy"></div>
-                    <div class="destination-content">
-                        <h3>Egypt</h3>
-                        <p>Pyramids, the Nile and Luxor's temples.</p>
-                        <a href="#" class="destination-cta" data-wa="Hello, I'd like to apply for an Egypt visa.">Enquire <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-                    </div>
-                </article>
-                <article class="destination-card reveal">
-                    <div class="destination-media"><img src="assets/joradan.jpeg" alt="Jordan visa" loading="lazy"></div>
-                    <div class="destination-content">
-                        <h3>Jordan</h3>
-                        <p>Petra, Wadi Rum and the Dead Sea.</p>
-                        <a href="#" class="destination-cta" data-wa="Hello, I'd like to apply for a Jordan visa.">Enquire <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-                    </div>
-                </article>
-                <article class="destination-card reveal">
-                    <div class="destination-media"><img src="assets/morocco.jpeg" alt="Morocco visa" loading="lazy"></div>
-                    <div class="destination-content">
-                        <h3>Morocco</h3>
-                        <p>Ancient medinas and desert landscapes.</p>
-                        <a href="#" class="destination-cta" data-wa="Hello, I'd like to apply for a Morocco visa.">Enquire <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-                    </div>
-                </article>
-                <article class="destination-card reveal">
-                    <div class="destination-media"><img src="assets/uzbek.jpeg" alt="Uzbekistan visa" loading="lazy"></div>
-                    <div class="destination-content">
-                        <h3>Uzbekistan</h3>
-                        <p>Samarkand, Bukhara and the Silk Road.</p>
-                        <a href="#" class="destination-cta" data-wa="Hello, I'd like to apply for an Uzbekistan visa.">Enquire <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-                    </div>
-                </article>
-                <article class="destination-card reveal">
-                    <div class="destination-media"><img src="assets/qatar.jpeg" alt="Qatar visa" loading="lazy"></div>
-                    <div class="destination-content">
-                        <h3>Qatar</h3>
-                        <p>Doha's skyline, souqs and desert seas.</p>
-                        <a href="#" class="destination-cta" data-wa="Hello, I'd like to apply for a Qatar visa.">Enquire <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-                    </div>
-                </article>
-                <article class="destination-card reveal">
-                    <div class="destination-media"><img src="assets/vietnam.jpeg" alt="Vietnam visa" loading="lazy"></div>
-                    <div class="destination-content">
-                        <h3>Vietnam</h3>
-                        <p>Rice terraces, Ha Long Bay and street food.</p>
-                        <a href="#" class="destination-cta" data-wa="Hello, I'd like to apply for a Vietnam visa.">Enquire <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-                    </div>
-                </article>
-                <article class="destination-card reveal">
-                    <div class="destination-media"><img src="assets/usa.jpeg" alt="USA visa" loading="lazy"></div>
-                    <div class="destination-content">
-                        <h3>USA</h3>
-                        <p>Visitor visa applications and interview prep.</p>
-                        <a href="#" class="destination-cta" data-wa="Hello, I'd like to apply for a USA visa.">Enquire <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-                    </div>
-                </article>
+
+            <div class="visa-grid">
+                <a href="#" class="visa reveal" data-wa="Hello, I'd like to apply for an Egypt visa.">
+                    <img src="assets/egypt.jpeg" alt="" loading="lazy">
+                    <span class="visa-chip glass">Egypt <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+                </a>
+                <a href="#" class="visa reveal" data-wa="Hello, I'd like to apply for a Jordan visa.">
+                    <img src="assets/joradan.jpeg" alt="" loading="lazy">
+                    <span class="visa-chip glass">Jordan <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+                </a>
+                <a href="#" class="visa reveal" data-wa="Hello, I'd like to apply for a Morocco visa.">
+                    <img src="assets/morocco.jpeg" alt="" loading="lazy">
+                    <span class="visa-chip glass">Morocco <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+                </a>
+                <a href="#" class="visa reveal" data-wa="Hello, I'd like to apply for an Uzbekistan visa.">
+                    <img src="assets/uzbek.jpeg" alt="" loading="lazy">
+                    <span class="visa-chip glass">Uzbekistan <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+                </a>
+                <a href="#" class="visa reveal" data-wa="Hello, I'd like to apply for a Qatar visa.">
+                    <img src="assets/qatar.jpeg" alt="" loading="lazy">
+                    <span class="visa-chip glass">Qatar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+                </a>
+                <a href="#" class="visa reveal" data-wa="Hello, I'd like to apply for a Vietnam visa.">
+                    <img src="assets/vietnam.jpeg" alt="" loading="lazy">
+                    <span class="visa-chip glass">Vietnam <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+                </a>
+                <a href="#" class="visa reveal" data-wa="Hello, I'd like to apply for a USA visa.">
+                    <img src="assets/usa.jpeg" alt="" loading="lazy">
+                    <span class="visa-chip glass">USA <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+                </a>
+                <a href="#" class="visa visa-other glass reveal" data-wa="Hello, I need a visa for another country.">
+                    <i class="fa-solid fa-earth-asia" aria-hidden="true"></i>
+                    <span class="visa-other-title">Somewhere else?</span>
+                    <span class="visa-other-text">Tell us the country — we'll guide you through it.</span>
+                    <span class="link-wa">Ask us <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+                </a>
             </div>
-            <button class="view-more-btn" aria-expanded="false">View more destinations</button>
         </section>
 
-        <!-- Services Section -->
-        <section id="services" class="services">
+        <!-- Services -->
+        <section id="services" class="section">
             <div class="section-head reveal">
-                <p class="eyebrow">What we do</p>
-                <h2>Our services</h2>
+                <p class="kicker">What we do</p>
+                <h2>One team, <em>every detail</em></h2>
             </div>
             <div class="services-grid">
-                <div class="service-card reveal">
-                    <i class="fas fa-passport" aria-hidden="true"></i>
+                <div class="service glass reveal">
+                    <span class="icon"><i class="fa-solid fa-passport" aria-hidden="true"></i></span>
                     <h3>Visa services</h3>
-                    <p>Tourist, business and visit visas for Egypt, Saudi, UAE, Uzbekistan and more.</p>
+                    <p>Tourist, business and visit visas, prepared right the first time.</p>
                 </div>
-                <div class="service-card reveal">
-                    <i class="fas fa-kaaba" aria-hidden="true"></i>
+                <div class="service glass reveal">
+                    <span class="icon"><i class="fa-solid fa-kaaba" aria-hidden="true"></i></span>
                     <h3>Umrah visas</h3>
-                    <p>Umrah visas and arrangements for individuals and groups.</p>
+                    <p>Visas and arrangements for individuals and groups.</p>
                 </div>
-                <div class="service-card reveal">
-                    <i class="fas fa-plane" aria-hidden="true"></i>
+                <div class="service glass reveal">
+                    <span class="icon"><i class="fa-solid fa-plane-departure" aria-hidden="true"></i></span>
                     <h3>Air ticketing</h3>
                     <p>Best fares on international and domestic flights.</p>
                 </div>
-                <div class="service-card reveal">
-                    <i class="fas fa-hotel" aria-hidden="true"></i>
+                <div class="service glass reveal">
+                    <span class="icon"><i class="fa-solid fa-bed" aria-hidden="true"></i></span>
                     <h3>Hotel booking</h3>
-                    <p>Stays that match your budget, close to what you came to see.</p>
+                    <p>Stays that fit your budget, close to what you came to see.</p>
                 </div>
-                <div class="service-card reveal">
-                    <i class="fas fa-map-marked-alt" aria-hidden="true"></i>
+                <div class="service glass reveal">
+                    <span class="icon"><i class="fa-solid fa-compass" aria-hidden="true"></i></span>
                     <h3>Tour packages</h3>
-                    <p>Flights, transfers, accommodation and excursions in one package.</p>
+                    <p>Flights, transfers, stays and excursions in one package.</p>
                 </div>
-                <div class="service-card reveal">
-                    <i class="fas fa-route" aria-hidden="true"></i>
+                <div class="service glass reveal">
+                    <span class="icon"><i class="fa-solid fa-route" aria-hidden="true"></i></span>
                     <h3>Trip planning</h3>
                     <p>Custom itineraries built around your dates and interests.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Mission Section -->
-        <section id="mission" class="mission">
-            <div class="section-head reveal">
-                <p class="eyebrow">Our mission</p>
-                <h2>Friendly, professional, reliable</h2>
-                <p>At Tasmim Travels, we are transforming the travel experience with a friendly, professional, and optimistic approach. Our goal is to connect you with the best travel solutions while upholding our core values of integrity, reliability, and ease.</p>
+        <!-- About & mission -->
+        <section id="about" class="section about">
+            <div class="about-statement reveal">
+                <p class="kicker">Our mission</p>
+                <blockquote>
+                    “We’re transforming the travel experience with a friendly, professional and optimistic approach — connecting you with the best travel solutions while upholding <em>integrity, reliability and ease.</em>”
+                </blockquote>
+                <ul class="values">
+                    <li><i class="fa-regular fa-heart" aria-hidden="true"></i> Customer first</li>
+                    <li><i class="fa-regular fa-gem" aria-hidden="true"></i> Integrity &amp; trust</li>
+                    <li><i class="fa-regular fa-circle-check" aria-hidden="true"></i> Reliability</li>
+                </ul>
             </div>
-            <div class="pillars-grid">
-                <div class="pillar-card reveal">
-                    <i class="fas fa-users" aria-hidden="true"></i>
-                    <h3>Customer first</h3>
-                    <p>Dedicated to delivering exceptional customer service and personalized attention.</p>
-                </div>
-                <div class="pillar-card reveal">
-                    <i class="fas fa-shield-halved" aria-hidden="true"></i>
-                    <h3>Integrity and trust</h3>
-                    <p>Operating with the highest standards of integrity and transparency.</p>
-                </div>
-                <div class="pillar-card reveal">
-                    <i class="fas fa-circle-check" aria-hidden="true"></i>
-                    <h3>Reliability</h3>
-                    <p>Known for trustworthiness and a curated selection of top services.</p>
-                </div>
-            </div>
+
+            <ol class="steps">
+                <li class="step glass reveal">
+                    <span class="step-num">01</span>
+                    <h3>Tell us your plan</h3>
+                    <p>Message your destination, dates and passport details.</p>
+                </li>
+                <li class="step glass reveal">
+                    <span class="step-num">02</span>
+                    <h3>We handle the details</h3>
+                    <p>We prepare your visa file and line up flights and hotels.</p>
+                </li>
+                <li class="step glass reveal">
+                    <span class="step-num">03</span>
+                    <h3>You travel</h3>
+                    <p>Receive your documents and itinerary, ready to go.</p>
+                </li>
+            </ol>
         </section>
 
-        <!-- About Section -->
-        <section id="about" class="about">
-            <div class="about-media reveal">
-                <img src="assets/offers/international.jpeg" alt="International travel and visa services" loading="lazy">
-            </div>
-            <div class="about-text reveal">
-                <p class="eyebrow">About Tasmim</p>
-                <h2>Travel planned properly, from visa to return flight.</h2>
-                <p>Tasmim Travel and Tours helps travellers and businesses with every part of the journey — visa applications, Umrah, flights, hotels and complete tour packages. We handle the paperwork and the planning so you can focus on enjoying your vacation or business trip.</p>
-                <ol class="steps">
-                    <li><span>1</span><div><strong>Tell us your plan</strong>Message us your destination, dates and passport details.</div></li>
-                    <li><span>2</span><div><strong>We handle the details</strong>We prepare your visa file and line up flights and hotels.</div></li>
-                    <li><span>3</span><div><strong>You travel</strong>Get your documents and itinerary, ready to go.</div></li>
-                </ol>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="contact">
-            <div class="contact-container">
-                <div class="contact-info reveal">
-                    <p class="eyebrow">Contact</p>
-                    <h2>Let's plan your trip</h2>
-                    <p>Send us a message and our team will get back to you quickly.</p>
+        <!-- Contact -->
+        <section id="contact" class="section">
+            <div class="contact glass reveal">
+                <div class="contact-info">
+                    <p class="kicker">Contact</p>
+                    <h2>Let’s plan <em>your trip</em></h2>
+                    <p class="lede">Send a message and our team will reply quickly — usually on WhatsApp.</p>
                     <ul class="contact-list">
-                        <li><i class="fas fa-phone" aria-hidden="true"></i><a href="tel:+918281404323">+91 82814 04323</a></li>
-                        <li><i class="fab fa-whatsapp" aria-hidden="true"></i><a href="#" data-wa="Hello Tasmim Travels!">WhatsApp us</a></li>
-                        <li><i class="fas fa-envelope" aria-hidden="true"></i><a href="mailto:info@tasmimtravels.com">info@tasmimtravels.com</a></li>
+                        <li><a href="tel:+918281404323"><i class="fa-solid fa-phone" aria-hidden="true"></i> +91 82814 04323</a></li>
+                        <li><a href="#" data-wa="Hello Tasmim Travels!"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp us</a></li>
+                        <li><a href="mailto:info@tasmimtravels.com"><i class="fa-regular fa-envelope" aria-hidden="true"></i> info@tasmimtravels.com</a></li>
                     </ul>
                 </div>
-                <form class="contact-form reveal" novalidate>
+
+                <form class="contact-form" novalidate>
                     <div class="field">
                         <label for="cf-name">Your name</label>
                         <input id="cf-name" name="name" type="text" autocomplete="name" required>
@@ -334,9 +334,9 @@
                     </div>
                     <div class="field">
                         <label for="cf-message">Message</label>
-                        <textarea id="cf-message" name="message" rows="4" placeholder="Travel dates, number of travellers, anything else…" required></textarea>
+                        <textarea id="cf-message" name="message" rows="4" placeholder="Travel dates, number of travellers…" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-whatsapp">
+                    <button type="submit" class="btn btn-ink">
                         <i class="fab fa-whatsapp" aria-hidden="true"></i> Send via WhatsApp
                     </button>
                     <p class="form-note" role="status" aria-live="polite"></p>
@@ -345,47 +345,30 @@
         </section>
     </main>
 
+    <!-- Footer -->
+    <footer class="footer">
+        <img src="assets/logo-ink.png" alt="Tasmim Travel and Tours" width="600" height="162" loading="lazy">
+        <nav class="footer-links" aria-label="Footer">
+            <a href="#offers">Offers</a>
+            <a href="#visas">Visas</a>
+            <a href="#services">Services</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <p>&copy; <span id="year">2026</span> Tasmim Travel and Tours</p>
+    </footer>
+
     <!-- WhatsApp Float Button -->
-    <a href="#" class="whatsapp-float" data-wa="Hello Tasmim Travels!" aria-label="Chat with us on WhatsApp">
+    <a href="#" class="wa-float glass" data-wa="Hello Tasmim Travels!" aria-label="Chat with us on WhatsApp">
         <i class="fab fa-whatsapp" aria-hidden="true"></i>
     </a>
 
     <!-- Lightbox -->
     <dialog class="lightbox" aria-label="Offer poster">
-        <button class="lightbox-close" aria-label="Close"><i class="fas fa-xmark" aria-hidden="true"></i></button>
+        <button class="lightbox-close glass" aria-label="Close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
         <img alt="">
     </dialog>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <img src="assets/logo.png" alt="Tasmim Travel and Tours" width="600" height="162" loading="lazy">
-                <p>Visas, Umrah, flights, hotels and tour packages.</p>
-            </div>
-            <div class="footer-links">
-                <h4>Quick links</h4>
-                <ul>
-                    <li><a href="#offers">Offers</a></li>
-                    <li><a href="#destinations">Visas</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>Get in touch</h4>
-                <ul>
-                    <li><a href="tel:+918281404323">+91 82814 04323</a></li>
-                    <li><a href="mailto:info@tasmimtravels.com">info@tasmimtravels.com</a></li>
-                    <li><a href="#" data-wa="Hello Tasmim Travels!">WhatsApp</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; <span id="year">2026</span> Tasmim Travel and Tours. All rights reserved.</p>
-        </div>
-    </footer>
     <script src="script.js"></script>
 </body>
 </html>
