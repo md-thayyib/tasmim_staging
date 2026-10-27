@@ -94,51 +94,14 @@ document.addEventListener('DOMContentLoaded', function() {
         window.open(waLink(`Hello Tasmim Travels, I need ${need}${destination ? ` for ${destination}` : ''}.`), '_blank', 'noopener');
     });
 
-    // Flight fares: read from the published Google Sheet so they can be updated daily from a phone.
-    // fares.json is the backup if the sheet can't be reached. Fares dated before today are hidden automatically.
-    const FARES_SHEET = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRTZJwLc7b8YOQrQaFWnuu7AEydzcy6KcB2YARf_KICbV4N_-ctD2I_x4BUs76inWsgZAfzG1nvnZcH/pub?gid=0&single=true&output=csv';
-    const FARES_BACKUP = 'fares.json';
+    // Flight fares: loaded by fares.js (Google Sheet, with fares.json as backup), one card per route
     const faresGrid = document.querySelector('.fares-grid');
     const faresEmpty = document.querySelector('.fares-empty');
     const faresUpdated = document.querySelector('.fares-updated');
     const rupees = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 });
-    const formatDate = (iso, opts) => new Date(`${iso}T00:00:00`).toLocaleDateString('en-GB', opts);
+    const { formatDate } = window.TasmimFares;
 
-    const parseCsv = (text) => {
-        const rows = text.trim().split(/\r?\n/).map((line) =>
-            (line.match(/("([^"]|"")*"|[^,]*)(,|$)/g) || [])
-                .map((cell) => cell.replace(/,$/, '').replace(/^"|"$/g, '').replace(/""/g, '"').trim())
-        );
-        const header = rows.shift().map((h) => h.toLowerCase());
-        return { fares: rows.map((r) => Object.fromEntries(header.map((h, i) => [h, r[i] || '']))) };
-    };
-
-    // accept prices typed as "13,000" or "₹13000", and dates typed day-first like 4/11/2026
-    const cleanFare = (f) => {
-        const price = Number(String(f.price).replace(/[^\d.]/g, ''));
-        let date = String(f.date || '').trim();
-        const dmy = date.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})$/);
-        if (dmy) date = `${dmy[3]}-${dmy[2].padStart(2, '0')}-${dmy[1].padStart(2, '0')}`;
-        return { ...f, from: String(f.from || '').trim(), to: String(f.to || '').trim(), date, price };
-    };
-
-    const renderFares = ({ updated, fares }) => {
-        fares = fares.map(cleanFare);
-        const now = new Date();
-        // local date (not UTC), so fares roll over at the visitor's midnight
-        const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-        const upcoming = fares
-            .filter((f) => f.from && f.to && /^\d{4}-\d{2}-\d{2}$/.test(f.date) && f.date >= today && f.price > 0)
-            .sort((a, b) => a.date.localeCompare(b.date));
-
-        // one card per route + airline + baggage
-        const routes = new Map();
-        upcoming.forEach((f) => {
-            const key = [f.from, f.to, f.airline, f.baggage].join('|');
-            if (!routes.has(key)) routes.set(key, { ...f, rows: [] });
-            routes.get(key).rows.push(f);
-        });
-
+    const renderFares = ({ updated, routes }) => {
         faresGrid.replaceChildren();
         routes.forEach((route) => {
             const card = document.createElement('article');
@@ -181,24 +144,14 @@ document.addEventListener('DOMContentLoaded', function() {
             faresGrid.append(card);
         });
 
-        faresEmpty.hidden = routes.size > 0;
+        faresEmpty.hidden = routes.length > 0;
         if (updated) {
             faresUpdated.textContent = `Last updated ${formatDate(updated, { day: 'numeric', month: 'long', year: 'numeric' })}`;
             faresUpdated.hidden = false;
         }
     };
 
-    const loadJson = (url) => fetch(url, { cache: 'no-cache' }).then((res) => {
-        if (!res.ok) throw new Error(res.status);
-        return res.json();
-    });
-
-    fetch(FARES_SHEET, { cache: 'no-cache' })
-        .then((res) => {
-            if (!res.ok) throw new Error(res.status);
-            return res.text().then(parseCsv);
-        })
-        .catch(() => loadJson(FARES_BACKUP))
+    window.TasmimFares.load()
         .then(renderFares)
         .catch(() => {
             faresEmpty.hidden = false;

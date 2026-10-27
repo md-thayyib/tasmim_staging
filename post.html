@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Channel Post | Tasmim Travels</title>
+    <!-- staff tool: keep it out of search results -->
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#0d0d0f">
+    <link rel="icon" type="image/jpeg" href="assets/favicon.jpg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: var(--sand);
+        }
+
+        .post-header {
+            background: var(--ink);
+            padding: 1rem 16px;
+        }
+
+        .post-header img {
+            height: 32px;
+            width: auto;
+        }
+
+        .post-page {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 2rem 16px 4rem;
+        }
+
+        .post-page h1 {
+            font-size: clamp(1.8rem, 6vw, 2.4rem);
+            margin-bottom: 0.4rem;
+        }
+
+        .post-intro {
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .post-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .post-status.error {
+            color: #c0392b;
+        }
+
+        .post-text {
+            width: 100%;
+            min-height: 420px;
+            padding: 1.1rem 1.2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            line-height: 1.55;
+            color: var(--text);
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            resize: vertical;
+        }
+
+        .post-text:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(200, 150, 62, 0.2);
+        }
+
+        .post-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .post-actions .btn {
+            justify-content: center;
+        }
+
+        .post-actions .btn-copy {
+            background: var(--ink);
+            color: #fff;
+        }
+
+        .post-actions .btn-refresh {
+            grid-column: 1 / -1;
+            background: transparent;
+            color: var(--ink);
+            border: 1.5px solid var(--ink);
+        }
+
+        .post-help {
+            margin-top: 2rem;
+            padding: 1.25rem 1.4rem;
+            background: var(--paper);
+            border-radius: var(--radius);
+            font-size: 0.92rem;
+            color: var(--muted);
+        }
+
+        .post-help strong {
+            color: var(--text);
+        }
+
+        .post-help ol {
+            margin: 0.5rem 0 0 1.2rem;
+            display: grid;
+            gap: 0.35rem;
+        }
+
+        @media (max-width: 420px) {
+            .post-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="post-header">
+        <a href="/"><img src="assets/logo.png" alt="Tasmim Travel and Tours" width="600" height="162"></a>
+    </header>
+
+    <main class="post-page">
+        <h1>Channel post</h1>
+        <p class="post-intro">Written from the Tasmim Fares sheet. Check it, edit anything you like, then copy it into the WhatsApp channel.</p>
+
+        <p class="post-status" role="status" aria-live="polite"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading fares from the sheet…</p>
+        <textarea id="post-text" class="post-text" spellcheck="false" aria-label="Channel post text"></textarea>
+
+        <div class="post-actions">
+            <button type="button" class="btn btn-copy"><i class="fas fa-copy" aria-hidden="true"></i> Copy post</button>
+            <button type="button" class="btn btn-channel btn-share"><i class="fab fa-whatsapp" aria-hidden="true"></i> Share</button>
+            <button type="button" class="btn btn-refresh"><i class="fas fa-rotate" aria-hidden="true"></i> Reload from sheet</button>
+        </div>
+
+        <div class="post-help">
+            <strong>Posting to the channel</strong>
+            <ol>
+                <li>Update the Tasmim Fares sheet, wait about 5 minutes, then tap <em>Reload from sheet</em>.</li>
+                <li>Tap <em>Copy post</em>.</li>
+                <li>Open the channel in WhatsApp, paste, and send.</li>
+            </ol>
+            <p style="margin-top: 0.75rem">Only fares from today onwards are included. Edits you make in the box above aren't saved — they're just for this post.</p>
+        </div>
+    </main>
+
+    <script src="fares.js"></script>
+    <script src="post.js"></script>
+</body>
+</html>

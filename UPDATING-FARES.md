@@ -24,6 +24,18 @@ If Google changes a date into something else, select the date column and choose 
 
 The sheet is published publicly so the website can read it, so only put fare information in it.
 
+## Posting the same fares to the WhatsApp channel
+
+You don't need to type the channel message. Open **https://tasmimtravels.com/post.html** (bookmark it on your phone):
+
+1. After updating the sheet, wait about 5 minutes and tap **Reload from sheet**.
+2. Check the message. You can edit it in the box before copying.
+3. Tap **Copy post**, open the channel in WhatsApp, paste and send. (On a phone, **Share** opens the share menu instead.)
+
+The page writes the post in the usual channel format: 🔥TASMIM TRAVELS🔥, a line per route with flags, ✈️ airline and 👜 baggage, then each date and price, and the booking number at the end. It only includes fares from today onwards. The page is hidden from Google, but anyone with the link can open it; it only shows the same fares as the website.
+
+WhatsApp doesn't allow posting to a channel automatically, so the final paste-and-send is still done by you.
+
 ## Backup
 
 If the sheet can't be reached, the site shows the fares saved in `fares.json` in this repo instead.
