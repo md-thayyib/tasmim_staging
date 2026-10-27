@@ -94,9 +94,10 @@ document.addEventListener('DOMContentLoaded', function() {
         window.open(waLink(`Hello Tasmim Travels, I need ${need}${destination ? ` for ${destination}` : ''}.`), '_blank', 'noopener');
     });
 
-    // Flight fares: loaded from fares.json (or a published Google Sheet CSV) so they can be updated daily.
-    // Fares dated before today are hidden automatically.
-    const FARES_SOURCE = 'fares.json';
+    // Flight fares: read from the published Google Sheet so they can be updated daily from a phone.
+    // fares.json is the backup if the sheet can't be reached. Fares dated before today are hidden automatically.
+    const FARES_SHEET = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRTZJwLc7b8YOQrQaFWnuu7AEydzcy6KcB2YARf_KICbV4N_-ctD2I_x4BUs76inWsgZAfzG1nvnZcH/pub?gid=0&single=true&output=csv';
+    const FARES_BACKUP = 'fares.json';
     const faresGrid = document.querySelector('.fares-grid');
     const faresEmpty = document.querySelector('.fares-empty');
     const faresUpdated = document.querySelector('.fares-updated');
@@ -112,12 +113,22 @@ document.addEventListener('DOMContentLoaded', function() {
         return { fares: rows.map((r) => Object.fromEntries(header.map((h, i) => [h, r[i] || '']))) };
     };
 
+    // accept prices typed as "13,000" or "₹13000", and dates typed day-first like 4/11/2026
+    const cleanFare = (f) => {
+        const price = Number(String(f.price).replace(/[^\d.]/g, ''));
+        let date = String(f.date || '').trim();
+        const dmy = date.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})$/);
+        if (dmy) date = `${dmy[3]}-${dmy[2].padStart(2, '0')}-${dmy[1].padStart(2, '0')}`;
+        return { ...f, from: String(f.from || '').trim(), to: String(f.to || '').trim(), date, price };
+    };
+
     const renderFares = ({ updated, fares }) => {
+        fares = fares.map(cleanFare);
         const now = new Date();
         // local date (not UTC), so fares roll over at the visitor's midnight
         const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
         const upcoming = fares
-            .filter((f) => f.from && f.to && f.date >= today && Number(f.price) > 0)
+            .filter((f) => f.from && f.to && /^\d{4}-\d{2}-\d{2}$/.test(f.date) && f.date >= today && f.price > 0)
             .sort((a, b) => a.date.localeCompare(b.date));
 
         // one card per route + airline + baggage
@@ -177,11 +188,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    fetch(FARES_SOURCE, { cache: 'no-cache' })
+    const loadJson = (url) => fetch(url, { cache: 'no-cache' }).then((res) => {
+        if (!res.ok) throw new Error(res.status);
+        return res.json();
+    });
+
+    fetch(FARES_SHEET, { cache: 'no-cache' })
         .then((res) => {
             if (!res.ok) throw new Error(res.status);
-            return FARES_SOURCE.endsWith('.json') ? res.json() : res.text().then(parseCsv);
+            return res.text().then(parseCsv);
         })
+        .catch(() => loadJson(FARES_BACKUP))
         .then(renderFares)
         .catch(() => {
             faresEmpty.hidden = false;
